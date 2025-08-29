@@ -1,0 +1,30 @@
+<html>
+<body>
+  Password: <input type="password" id="pass"><br>
+  Confirm Password: <input type="password" id="confirm"><br>
+  <span id="matchMsg"></span>
+
+  <script>
+    const pass = document.getElementById("pass");
+    const confirm = document.getElementById("confirm");
+    const matchMsg = document.getElementById("matchMsg");
+
+    function checkMatch() {
+      if (pass.value === "" || confirm.value === "") {
+        matchMsg.textContent = "";
+        return;
+      }
+      if (pass.value === confirm.value) {
+        matchMsg.textContent = " Passwords match";
+        matchMsg.style.color = "green";
+      } else {
+        matchMsg.textContent = " Passwords do not match";
+        matchMsg.style.color = "red";
+      }
+    }
+
+    pass.oninput = checkMatch;
+    confirm.oninput = checkMatch;
+  </script>
+</body>
+</html>

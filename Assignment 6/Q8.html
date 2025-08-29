@@ -1,0 +1,28 @@
+<html>
+<body>
+  Color Code: <input type="text" id="color"><br>
+  <span id="colorMsg"></span><br>
+  <div id="preview" style="width:100px;height:50px;border:1px solid #000;"></div>
+
+  <script>
+    const colorInput = document.getElementById("color");
+    const colorMsg = document.getElementById("colorMsg");
+    const preview = document.getElementById("preview");
+
+    colorInput.addEventListener("input", () => {
+      const val = colorInput.value;
+      const regex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+
+      if (regex.test(val)) {
+        colorMsg.textContent = "Valid color code";
+        colorMsg.style.color = "green";
+        preview.style.backgroundColor = val;
+      } else {
+        colorMsg.textContent = "Invalid hex code (e.g., #FFF or #FFFFFF)";
+        colorMsg.style.color = "red";
+        preview.style.backgroundColor = "transparent";
+      }
+    });
+  </script>
+</body>
+</html>

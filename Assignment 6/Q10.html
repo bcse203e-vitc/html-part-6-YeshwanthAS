@@ -1,0 +1,57 @@
+<html>
+<body>
+  <select id="inputType">
+    <option value="text">Text</option>
+    <option value="email">Email</option>
+    <option value="password">Password</option>
+  </select>
+  <button onclick="addInput()">Add</button><br><br>
+
+  <form id="dynamicForm" onsubmit="return validateForm()">
+    <div id="formContainer"></div>
+    <button type="submit">Submit</button>
+  </form>
+  <span id="formMsg"></span>
+
+  <script>
+    function addInput() {
+      const type = document.getElementById("inputType").value;
+      const container = document.getElementById("formContainer");
+      const input = document.createElement("input");
+      input.type = type;
+      input.name = type + "_" + Date.now();
+      input.placeholder = "Enter " + type;
+      input.className = "dynamicInput";
+      container.appendChild(input);
+      container.appendChild(document.createElement("br"));
+    }
+
+    function validateForm() {
+      const inputs = document.querySelectorAll(".dynamicInput");
+      const msg = document.getElementById("formMsg");
+      let valid = true;
+
+      inputs.forEach(input => {
+        const val = input.value;
+        let regex;
+
+        if (input.type === "text") {
+          regex = /^[A-Za-z\s]{3,}$/;
+        } else if (input.type === "email") {
+          regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+        } else if (input.type === "password") {
+          regex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+        }
+
+        if (!regex.test(val)) {
+          valid = false;
+        }
+      });
+
+      msg.textContent = valid ? " All inputs valid" : "Some inputs are invalid";
+      msg.style.color = valid ? "green" : "red";
+      return valid;
+    }
+  </script>
+</body>
+</html>

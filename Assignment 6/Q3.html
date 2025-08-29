@@ -1,0 +1,22 @@
+<html>
+<body>
+  Phone: <input type="text" id="phone"><br>
+  <span id="phoneMsg"></span>
+
+  <script>
+    const phone = document.getElementById("phone");
+    const phoneMsg = document.getElementById("phoneMsg");
+
+    phone.addEventListener("input", () => {
+      const regex = /^(\(\d{3}\)\s|\d{3}-)\d{3}-\d{4}$/;
+      if (regex.test(phone.value)) {
+        phoneMsg.textContent = "Valid phone number";
+        phoneMsg.style.color = "green";
+      } else {
+        phoneMsg.textContent = "Invalid format (e.g., (123) 456-7890 or 123-456-7890)";
+        phoneMsg.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

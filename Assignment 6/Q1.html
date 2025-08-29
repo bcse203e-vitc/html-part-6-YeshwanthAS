@@ -1,1 +1,55 @@
+<html>
+<body>
+  <form id="regForm">
+    Name: <input type="text" id="name"><br>
+    Email: <input type="text" id="email"><span id="emailError"></span><br>
+    Password: <input type="password" id="password"><span id="passError"></span><br>
+    <button type="submit" id="submitBtn" disabled>Submit</button>
+  </form>
 
+  <script>
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const submitBtn = document.getElementById("submitBtn");
+    const emailError = document.getElementById("emailError");
+    const passError = document.getElementById("passError");
+
+    function validateEmail(emailVal) {
+      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailVal);
+    }
+
+    function validatePassword(passVal) {
+      return /^(?=.*[A-Z])(?=.*\d).{8,}$/.test(passVal);
+    }
+
+    function checkForm() {
+      if (
+        name.value.trim() !== "" &&
+        validateEmail(email.value) &&
+        validatePassword(password.value)
+      ) {
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.disabled = true;
+      }
+    }
+
+    email.onblur = () => {
+      emailError.textContent = validateEmail(email.value) ? "" : "Invalid email";
+      checkForm();
+    };
+
+    password.onblur = () => {
+      passError.textContent = validatePassword(password.value)
+        ? ""
+        : "Password must be 8+ chars, 1 uppercase, 1 number";
+      checkForm();
+    };
+
+    name.oninput = checkForm;
+    email.oninput = checkForm;
+    password.oninput = checkForm;
+  </script>
+</body>
+</html>

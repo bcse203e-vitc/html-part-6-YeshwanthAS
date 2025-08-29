@@ -1,0 +1,28 @@
+<html>
+<body>
+  <form id="hobbyForm">
+    <div id="hobbyContainer">
+      Hobby: <input type="text" class="hobby"><br>
+    </div>
+    <button type="button" onclick="addHobby()">Add Hobby</button>
+  </form>
+
+  <script>
+    function addHobby() {
+      const container = document.getElementById("hobbyContainer");
+      const input = document.createElement("input");
+      input.type = "text";
+      input.className = "hobby";
+      input.placeholder = "Enter hobby";
+      input.onblur = () => {
+        const regex = /^[A-Za-z\s]+$/;
+        if (!regex.test(input.value)) {
+          alert("Only alphabets allowed in hobbies");
+        }
+      };
+      container.appendChild(document.createElement("br"));
+      container.appendChild(input);
+    }
+  </script>
+</body>
+</html>

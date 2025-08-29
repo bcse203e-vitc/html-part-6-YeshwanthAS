@@ -1,0 +1,27 @@
+<html>
+<body>
+  <form onsubmit="return validateDate()">
+    Date (DD/MM/YYYY): <input type="text" id="date"><br>
+    <span id="dateMsg"></span><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function validateDate() {
+      const date = document.getElementById("date").value;
+      const dateMsg = document.getElementById("dateMsg");
+      const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+      if (!regex.test(date)) {
+        dateMsg.textContent = " Invalid date format. Use DD/MM/YYYY";
+        dateMsg.style.color = "red";
+        return false;
+      } else {
+        dateMsg.textContent = "Valid date format";
+        dateMsg.style.color = "green";
+        return true;
+      }
+    }
+  </script>
+</body>
+</html>
